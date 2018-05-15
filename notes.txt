@@ -1,0 +1,54 @@
+when you first come to page only show the start button everything else is hidden
+hit start everything else is hidden
+
+take everything beside start button in one div with id game wrapper
+id for start wrapper iwth start button game wrapper for evertything else
+to hide game wrapper style display none. use html.
+in JS top of page when you click on button other div shows the rest of the game
+
+ADD SCRIPT TO BODY AT THE BOTTOM NOT IN HEAD before the end of the body
+var start button = document.getElemetn by id ("startButton");
+startButton.onclick = function()
+{
+    document.getElementbyId ("game-wrapper")el.style.display = "block";
+    document.getElementbyId ("start-wrapper")el.style.display = "none";
+    startGame();
+}
+
+move function statGAme
+comment out entire loop, get ride of dow you want to play the game?
+give div of player name input playerName
+
+varplyaerName = get.getElementbyId("playerName");
+function setPlayerName (user){ playerName.innerText = "user";
+
+}
+function start Game(){
+    var user = prompt
+    setPlayerName (user);
+    startCombat(user)
+
+}
+
+make a function to make the code for the attack button
+take out the while loop and make it a function to trigger it at the right time
+
+function attck (){
+    --if (attack.toLower case cut and add to attack funciton)
+}
+//hook up the attack button
+var attackbutton=document.getelemetnbyid "attackbuatoon"
+attackbutton.onclick=attack;
+function attack(){
+    --userhelat -=get
+}
+move userHelath and grant helath to global variable move to up to start
+
+need a message under button
+
+update progress bar user helath
+user health changes in attack function update progess bar to update
+var playerHealthProgressBar = document.getElements byClassName("playerHealth")[0];
+playerHealthProgressBar.value = 
+
+add back in the end

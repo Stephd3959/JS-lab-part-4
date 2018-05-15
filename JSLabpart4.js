@@ -2,7 +2,8 @@
 //global
 var userHealth = 40;
 var grantHealth = 10;
-var wins = 0;
+var playerWins = 0;
+var playerHealCount =2;
 
 
 // Hook up the start button
@@ -20,148 +21,78 @@ function setPlayerName(user) {
 }
 
 // Hook up the attack button
-var attackButton=document.getElementById("attackButton");
-attackButton.onclick=attack;
+var attackButton = document.getElementById("attackButton");
+attackButton.onclick = attack;
 function attack() {
   userHealth -= getDamage(5);
   grantHealth -= getDamage(3);
-  console.log(`The user has ${userHealth} health remaining`);
-  console.log(`Grant has ${grantHealth} health remaining`);
+document.getElementById("statusText").innerText=`The user has ${userHealth} health remaining Grant has ${grantHealth} health remaining`;
+  // console.log(`);
+  // console.log(`Grant has ${grantHealth} health remaining`);
 
   var playerHeathProgressBar = document.getElementsByClassName("playerHealth")[0];
   playerHeathProgressBar.value = userHealth;
-  
+
   var enemyHealthProgressBar = document.getElementsByClassName("enemyHealth")[0];
   enemyHealthProgressBar.value = grantHealth;
 
+  var playerWinsProgressBar = document.getElementsByClassName("playerWins")[0];
+  playerWinsProgressBar.value = playerWins;
+
+  
   if (grantHealth <= 0) {
-    wins++;
+    playerWins++;
     grantHealth = 10;
-    var message = `The user has 1 victory`
-    if (wins > 1) {
-      var message = `The user has 1 victory`
-    }
+       }
   }
+
+//h00k up heal
+ var healButton=document.getElementById("healButton");
+  healButton.onclick=heal;
+function heal() {
+  if(playerHealCount >0){
+  userHealth += getRandom(10);
+  playerHealCount--;
+  playerHealCountProgressBar.value = playerHealCount;
+  document.getElementById("statusText").innerText=`the user has healed and has ${userHealth}`;
+    }
+  }  
+var playerHealCountProgressBar = document.getElementsByClassName("playerHealCount")[0];
+  // playerHealCountProgressBar.value = playerHealCount; 
+
+// button
+// var playStatusMessage=document.getElementsByTagName("p");
+// var statusUpdate=document.createTextNode(`${playerName}` +  `${userHealth}`);
+// p.appendChild (playStatusMessage); 
+// document.write("This is a test" + `${userHealth}`);
+
+  //hook up Quit 
+var quitButton = document.getElementById("quitButton");
+quitButton.onclick = quit;
+function quit(){
+  document.getElementById("game-wrapper").style.display = "none";
+  document.getElementById("start-wrapper").style.display = "block";
+  alert("You have quit the game. Have a nice day.")
+  return;
 }
 
 function startGame() {
   var user = prompt('Please enter your name');
   setPlayerName(user);
   // startCombat(user);
-  }
+}
 
-  function getDamage(max){
-    return getRandom(max)
-    }
-    function getRandom (max) {
-     return Math.floor(Math.random() * max) + 1;
-      }
+function getDamage(max) {
+  return getRandom(max)
+}
+function getRandom(max) {
+  return Math.floor(Math.random() * max) + 1;
+}
+
+
+
+
  
-// //Convert the variables relating to Grant and the user’s character into objects. Add an option to heal your character.
-// //this is an object
-// class Computer {
-//   constructor(name, health){
-//     this.name= name;
-//     this.health = health;
-//   }
-//   //generateAttackDamage returns a random number between 1 and 3.
-//    generateAttackDamage(){
-//     return getRandom(5)
-//   }
-// }
-// //The extends keyword is used in class declarations or class expressions to create a class which is a child of another class.
-// class Character extends Computer{
-//   constructor (name, health, healsRemaining){
-//     //The super keyword is used to access and call functions on an object's parent.
-//     super (name,health);
-//     this.healsRemaining = healsRemaining;
-//     this.wins = 0;
-//   }
-//  //methods 
-//  generateAttackDamage(){
-//     return getRandom(3);
-//   }
-//   heal(){
-//     //adds a random number between 1 and 10 to the character’s health . Also
-// //subtracts one from healsRemaining . (hint: you should use ` this `).
-//     this.health += getRandom(10);
-//     this.healsRemaining--;
-//   }
-//  }
 
-// var TOTAL_WINS = 5;
-// var COMPUTER_STARTING_HEALTH = 10;
 
-// startGame();
 
-// // function startGame(){
-// //   // var question = prompt("Do you want to play a game?");
-// //   if (question.toLowerCase() === 'yes' || 'y'){
-// //     var userName = prompt("What is your name?");
-// //     startCombat(userName);
-// //   }
-// // }
-
-// function startCombat(userName){
-
-//   var grant = new Computer('Grant', COMPUTER_STARTING_HEALTH);
-//   var user = new Character(userName, 40, 2);
-// //new Charater (userName, heath, healsRemaining)
-//   while (user.wins < TOTAL_WINS && user.health > 0){
-//     var shouldAttack = prompt("attack, heal or quit");
-
-//     if (shouldAttack === 'quit'){
-//       console.log('You selected quit thanks for playing')
-//       return;
-//     }
-//     if (shouldAttack === 'attack'){
-//       user.health -= grant.generateAttackDamage();
-//       grant.health -= user.generateAttackDamage();
-//     }
-//     if (shouldAttack === "heal"){
-//       user.heal();
-//       // grant.health -= user.generateAttackDamage();
-//       console.log(`${user.name} has healed and has ${user.health}`);
-//     }
-//     console.log(user.name + ' has ' + user.health + ' health left');
-//     console.log(`${grant.name} has ${grant.health} health left`);
-
-//     if (grant.health < 1){
-//       user.wins++;
-//       grant.health = COMPUTER_STARTING_HEALTH;
-//       console.log(`${user.name} has ${user.wins} win(s)`);
-//     }
-
-//     if (user.healsRemaining === 0){
-//       grant.generateAttackDamage();
-//       user.generateAttackDamage();
-//       console.log(`${user.name} has ${user.health} health left`);
-//       console.log(`Grant has ${grant.health} health left`);
-//     }
-
-//   }
-
-//   if (user.wins === TOTAL_WINS){
-//     console.log(`${user.name} has ${user.wins} wins`);
-//   } else {
-//     console.log('Grant Wins');
-//   }
-// }
-
-// function getRandom (max) {
-//   return Math.floor(Math.random() * max) + 1;
-// }
-
-// function move() {
-//   var elem = document.getElementById("attackButton"); 
-//   var width = 1;
-//   var id = setInterval(frame, 10);
-//   function frame() {
-//       if (width >= 100) {
-//           clearInterval(id);
-//       } else {
-//           width++; 
-//           elem.style.width = width + '%'; 
-//       }
-//   }
-// }
